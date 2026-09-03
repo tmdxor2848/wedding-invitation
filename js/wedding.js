@@ -590,3 +590,96 @@ if (
   );
 
 }
+
+/* =========================================
+   빨간 리본 청첩장 오프닝
+========================================= */
+
+const weddingIntro =
+  document.getElementById("weddingIntro");
+
+const openInvitation =
+  document.getElementById("openInvitation");
+
+const openInvitationText =
+  document.getElementById("openInvitationText");
+
+
+function startInvitation() {
+
+  if (!weddingIntro) {
+    return;
+  }
+
+
+  /* 중복 클릭 방지 */
+
+  if (
+    weddingIntro.classList.contains(
+      "opening"
+    )
+  ) {
+    return;
+  }
+
+
+  /*
+     1단계
+     리본 + 봉투 열기
+  */
+
+  weddingIntro.classList.add(
+    "opening"
+  );
+
+
+  /*
+     2단계
+     메인화면 공개
+  */
+
+  setTimeout(() => {
+
+    weddingIntro.classList.add(
+      "intro-finish"
+    );
+
+    document.body.style.overflow = "";
+
+  }, 1800);
+
+}
+
+
+/* 처음에는 뒤쪽 페이지 스크롤 방지 */
+
+if (weddingIntro) {
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+/* 가운데 봉인 클릭 */
+
+if (openInvitation) {
+
+  openInvitation.addEventListener(
+    "click",
+    startInvitation
+  );
+
+}
+
+
+/* 청첩장 열기 글자 클릭 */
+
+if (openInvitationText) {
+
+  openInvitationText.addEventListener(
+    "click",
+    startInvitation
+  );
+
+}

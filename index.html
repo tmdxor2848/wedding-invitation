@@ -7,13 +7,77 @@
   <title>승택 ♥ 소미 결혼합니다</title>
   <link rel="stylesheet" href="./css/wedding.css">
 
-  <!-- 종이 청첩장 일러스트를 정확히 잘라 사용하는 꽃가마 애니메이션 -->
-  <style>
-
-  </style>
 </head>
 
 <body>
+  <!-- =========================================
+     청첩장 오프닝
+========================================= -->
+
+  <div class="wedding-intro" id="weddingIntro">
+
+    <div class="intro-envelope">
+
+      <!-- 봉투 안쪽 카드 -->
+      <div class="intro-card">
+
+        <p class="intro-small">
+          WE ARE GETTING MARRIED
+        </p>
+
+        <h1 class="intro-name">
+          임승택
+          <span>&amp;</span>
+          김소미
+        </h1>
+
+        <p class="intro-date">
+          2026. 12. 19
+        </p>
+
+      </div>
+
+
+      <!-- 봉투 -->
+      <div class="envelope-body"></div>
+
+      <div class="envelope-flap"></div>
+
+
+      <!-- 빨간 리본 -->
+      <div class="intro-ribbon">
+
+        <div class="ribbon-left"></div>
+
+        <div class="ribbon-right"></div>
+
+
+        <!-- 가운데 봉인 -->
+        <button type="button" class="ribbon-seal" id="openInvitation" aria-label="청첩장 열기">
+          <span class="seal-chinese">
+            囍
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="intro-bottom">
+
+      <p class="intro-message">
+        승택 그리고 소미
+      </p>
+
+      <button type="button" class="intro-open-button" id="openInvitationText">
+        청첩장 열기
+        <span>↓</span>
+      </button>
+
+    </div>
+
+  </div>
   <main class="wedding-container">
 
     <!-- =========================
