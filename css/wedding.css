@@ -754,7 +754,7 @@ body {
 .wedding-day-overlay {
   position: absolute;
 
-  top: 20px;
+  top: 10px;
   left: 0;
 
   width: 100%;
@@ -765,7 +765,7 @@ body {
 }
 
 .wedding-day-kicker {
-  margin-bottom: 3px;
+  margin-bottom: 5px;
 
   font-size: 9px;
 
@@ -775,6 +775,7 @@ body {
 }
 
 .wedding-day-big-date {
+  transform: translateY(-10px);
   font-family: Georgia, serif;
 
   font-size: 42px;
@@ -787,13 +788,14 @@ body {
 }
 
 .wedding-day-big-date span {
-  margin: 0 3px;
+  margin: 0 5px;
 
   color: #b5383e;
 }
 
 .wedding-day-year {
-  margin-top: 7px;
+  transform: translateY(-14px);
+  margin-top: 3px;
 
   font-size: 10px;
 
