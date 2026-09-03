@@ -592,7 +592,7 @@ if (
 }
 
 /* =========================================
-   빨간 리본 청첩장 오프닝
+   청첩장 오프닝
 ========================================= */
 
 const weddingIntro =
@@ -605,6 +605,9 @@ const openInvitationText =
   document.getElementById("openInvitationText");
 
 
+let introOpened = false;
+
+
 function startInvitation() {
 
   if (!weddingIntro) {
@@ -612,31 +615,20 @@ function startInvitation() {
   }
 
 
-  /* 중복 클릭 방지 */
-
-  if (
-    weddingIntro.classList.contains(
-      "opening"
-    )
-  ) {
+  if (introOpened) {
     return;
   }
 
 
-  /*
-     1단계
-     리본 + 봉투 열기
-  */
-
-  weddingIntro.classList.add(
-    "opening"
-  );
+  introOpened = true;
 
 
-  /*
-     2단계
-     메인화면 공개
-  */
+  /* 리본 / 봉투 애니메이션 시작 */
+
+  weddingIntro.classList.add("opening");
+
+
+  /* 약 1.8초 후 오프닝 화면 제거 */
 
   setTimeout(() => {
 
@@ -644,14 +636,21 @@ function startInvitation() {
       "intro-finish"
     );
 
-    document.body.style.overflow = "";
+
+    document.body.style.overflow =
+      "auto";
+
+
+    document.documentElement.style.overflow =
+      "auto";
+
 
   }, 1800);
 
 }
 
 
-/* 처음에는 뒤쪽 페이지 스크롤 방지 */
+/* 오프닝 중 스크롤 막기 */
 
 if (weddingIntro) {
 
@@ -661,7 +660,7 @@ if (weddingIntro) {
 }
 
 
-/* 가운데 봉인 클릭 */
+/* 가운데 봉인 */
 
 if (openInvitation) {
 
@@ -673,7 +672,7 @@ if (openInvitation) {
 }
 
 
-/* 청첩장 열기 글자 클릭 */
+/* 청첩장 열기 버튼 */
 
 if (openInvitationText) {
 
