@@ -1,488 +1,852 @@
-const fadeElements = document.querySelectorAll(".fade-up");
+/* =========================================================
+   승택 ♥ 소미 모바일 청첩장
+   wedding.js
+========================================================= */
 
-const observer = new IntersectionObserver((entries) => {
 
-  entries.forEach((entry) => {
+/* =========================================================
+   1. 청첩장 오프닝
+   - 리본 풀기
+   - 봉투 열기
+========================================================= */
 
-    if (entry.isIntersecting) {
+const weddingIntro =
+  document.getElementById("weddingIntro");
 
-      entry.target.classList.add("show");
+const openInvitation =
+  document.getElementById("openInvitation");
 
-    }
+const openInvitationText =
+  document.getElementById("openInvitationText");
 
-  });
 
-}, {
-  threshold: 0.2
-});
+let introOpened = false;
 
-fadeElements.forEach((element) => {
 
-  observer.observe(element);
+function startInvitation() {
 
-});
+  if (!weddingIntro) {
+    return;
+  }
 
-const weddingDate = new Date("2026-12-19T12:00:00");
 
-const today = new Date();
+  /* 두 번 클릭 방지 */
 
-const difference = weddingDate - today;
+  if (introOpened) {
+    return;
+  }
 
-const dday = Math.ceil(
-  difference / (1000 * 60 * 60 * 24)
-);
 
-const ddayText = document.querySelector("#dday");
+  introOpened = true;
 
-if (dday > 0) {
 
-  ddayText.innerText =
-    "승택 ♥ 소미의 결혼식까지 " + dday + "일 남았습니다.";
+  /* 리본 / 봉투 애니메이션 시작 */
 
-} else if (dday === 0) {
+  weddingIntro.classList.add("opening");
 
-  ddayText.innerText =
-    "오늘, 저희 결혼합니다.";
 
-} else {
+  /* 1.8초 후 오프닝 화면 제거 */
 
-  ddayText.innerText =
-    "함께 축복해 주셔서 감사합니다.";
+  setTimeout(() => {
+
+    weddingIntro.classList.add(
+      "intro-finish"
+    );
+
+
+    /* 스크롤 다시 허용 */
+
+    document.body.style.overflow = "";
+
+    document.documentElement.style.overflow = "";
+
+  }, 1800);
 
 }
 
 
-/* =========================
-   Wedding Gallery
-========================= */
+/* 오프닝 화면이 있을 때만 스크롤 막기 */
+
+if (weddingIntro) {
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+/* 가운데 봉인 클릭 */
+
+if (openInvitation) {
+
+  openInvitation.addEventListener(
+    "click",
+    startInvitation
+  );
+
+}
+
+
+/* 청첩장 열기 글자 클릭 */
+
+if (openInvitationText) {
+
+  openInvitationText.addEventListener(
+    "click",
+    startInvitation
+  );
+
+}
+
+
+
+/* =========================================================
+   2. 스크롤 FADE 애니메이션
+========================================================= */
+
+const fadeElements =
+  document.querySelectorAll(".fade-up");
+
+
+if (
+  fadeElements.length > 0 &&
+  "IntersectionObserver" in window
+) {
+
+  const observer =
+    new IntersectionObserver(
+
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add(
+              "show"
+            );
+
+          }
+
+        });
+
+      },
+
+      {
+        threshold: 0.2
+      }
+
+    );
+
+
+  fadeElements.forEach((element) => {
+
+    observer.observe(element);
+
+  });
+
+}
+
+
+/* IntersectionObserver 미지원 브라우저 */
+
+else {
+
+  fadeElements.forEach((element) => {
+
+    element.classList.add("show");
+
+  });
+
+}
+
+
+
+/* =========================================================
+   3. D-DAY
+========================================================= */
+
+const weddingDate =
+  new Date("2026-12-19T12:00:00");
+
+
+const today =
+  new Date();
+
+
+const difference =
+  weddingDate - today;
+
+
+const dday =
+  Math.ceil(
+
+    difference /
+    (1000 * 60 * 60 * 24)
+
+  );
+
+
+const ddayText =
+  document.querySelector("#dday");
+
+
+/* #dday 요소가 있을 때만 실행 */
+
+if (ddayText) {
+
+  if (dday > 0) {
+
+    ddayText.innerText =
+      "승택 ♥ 소미의 결혼식까지 "
+      + dday
+      + "일 남았습니다.";
+
+  }
+
+  else if (dday === 0) {
+
+    ddayText.innerText =
+      "오늘, 저희 결혼합니다.";
+
+  }
+
+  else {
+
+    ddayText.innerText =
+      "함께 축복해 주셔서 감사합니다.";
+
+  }
+
+}
+
+
+
+/* =========================================================
+   4. WEDDING GALLERY
+========================================================= */
 
 const galleryItems =
-  document.querySelectorAll(".gallery-item");
+  document.querySelectorAll(
+    ".gallery-item"
+  );
+
 
 const galleryModal =
-  document.querySelector("#galleryModal");
+  document.querySelector(
+    "#galleryModal"
+  );
+
 
 const modalImage =
-  document.querySelector("#modalImage");
+  document.querySelector(
+    "#modalImage"
+  );
+
 
 const modalClose =
-  document.querySelector("#modalClose");
+  document.querySelector(
+    "#modalClose"
+  );
+
 
 const modalPrev =
-  document.querySelector("#modalPrev");
+  document.querySelector(
+    "#modalPrev"
+  );
+
 
 const modalNext =
-  document.querySelector("#modalNext");
+  document.querySelector(
+    "#modalNext"
+  );
+
 
 const modalCount =
-  document.querySelector("#modalCount");
+  document.querySelector(
+    "#modalCount"
+  );
 
 
 let currentImageIndex = 0;
 
 
-/* 사진 주소들을 배열에 저장 */
+/* 사진 주소 배열 */
 
 const galleryImages = [];
 
+
 galleryItems.forEach((item) => {
 
-  galleryImages.push(
-    item.dataset.image
-  );
+  if (item.dataset.image) {
+
+    galleryImages.push(
+      item.dataset.image
+    );
+
+  }
 
 });
 
 
-/* 사진 클릭 */
-
-galleryItems.forEach((item, index) => {
-
-  item.addEventListener("click", () => {
-
-    currentImageIndex = index;
-
-    showImage();
-
-    galleryModal.classList.add("show");
-
-    document.body.style.overflow = "hidden";
-
-  });
-
-});
-
-
-/* 사진 표시 */
+/* -----------------------------------------
+   현재 사진 표시
+----------------------------------------- */
 
 function showImage() {
+
+  if (
+    !modalImage ||
+    galleryImages.length === 0
+  ) {
+
+    return;
+
+  }
+
 
   modalImage.src =
     galleryImages[currentImageIndex];
 
-  modalCount.innerText =
-    (currentImageIndex + 1)
-    + " / "
-    + galleryImages.length;
+
+  if (modalCount) {
+
+    modalCount.innerText =
+
+      (currentImageIndex + 1)
+
+      + " / "
+
+      + galleryImages.length;
+
+  }
 
 }
 
 
-/* 다음 사진 */
+/* -----------------------------------------
+   사진 클릭
+----------------------------------------- */
 
-modalNext.addEventListener("click", () => {
+galleryItems.forEach(
+  (item, index) => {
 
-  currentImageIndex++;
+    item.addEventListener(
+      "click",
+      () => {
 
-  if (
-    currentImageIndex >=
-    galleryImages.length
-  ) {
-
-    currentImageIndex = 0;
-
-  }
-
-  showImage();
-
-});
+        if (!galleryModal) {
+          return;
+        }
 
 
-/* 이전 사진 */
-
-modalPrev.addEventListener("click", () => {
-
-  currentImageIndex--;
-
-  if (currentImageIndex < 0) {
-
-    currentImageIndex =
-      galleryImages.length - 1;
-
-  }
-
-  showImage();
-
-});
+        currentImageIndex =
+          index;
 
 
-/* 닫기 */
-
-modalClose.addEventListener("click", () => {
-
-  closeGallery();
-
-});
+        showImage();
 
 
-/* 사진 바깥 클릭 */
+        galleryModal.classList.add(
+          "show"
+        );
 
-galleryModal.addEventListener("click", (event) => {
 
-  if (event.target === galleryModal) {
+        document.body.style.overflow =
+          "hidden";
 
-    closeGallery();
+      }
+    );
 
   }
+);
 
-});
 
+/* -----------------------------------------
+   다음 사진
+----------------------------------------- */
+
+if (modalNext) {
+
+  modalNext.addEventListener(
+    "click",
+    () => {
+
+      if (
+        galleryImages.length === 0
+      ) {
+
+        return;
+
+      }
+
+
+      currentImageIndex++;
+
+
+      if (
+        currentImageIndex >=
+        galleryImages.length
+      ) {
+
+        currentImageIndex = 0;
+
+      }
+
+
+      showImage();
+
+    }
+  );
+
+}
+
+
+/* -----------------------------------------
+   이전 사진
+----------------------------------------- */
+
+if (modalPrev) {
+
+  modalPrev.addEventListener(
+    "click",
+    () => {
+
+      if (
+        galleryImages.length === 0
+      ) {
+
+        return;
+
+      }
+
+
+      currentImageIndex--;
+
+
+      if (
+        currentImageIndex < 0
+      ) {
+
+        currentImageIndex =
+          galleryImages.length - 1;
+
+      }
+
+
+      showImage();
+
+    }
+  );
+
+}
+
+
+/* -----------------------------------------
+   갤러리 닫기
+----------------------------------------- */
 
 function closeGallery() {
 
-  galleryModal.classList.remove("show");
+  if (!galleryModal) {
+    return;
+  }
+
+
+  galleryModal.classList.remove(
+    "show"
+  );
+
 
   document.body.style.overflow = "";
 
 }
 
-/* =========================================
-   꽃가마 애니메이션
-========================================= */
 
-const gamaSection =
-  document.querySelector(".gama-section");
+/* X 버튼 */
 
-const gamaRunner =
-  document.querySelector(".gama-runner");
+if (modalClose) {
 
-
-if (gamaSection && gamaRunner) {
-
-  const gamaObserver =
-    new IntersectionObserver((entries) => {
-
-      entries.forEach((entry) => {
-
-        /*
-            꽃가마 영역이 화면에
-            약 30% 보이면 시작
-        */
-
-        if (entry.isIntersecting) {
-
-          gamaRunner.classList.add(
-            "is-running"
-          );
-
-
-          /*
-              한 번 실행 후 감시 종료
-          */
-
-          gamaObserver.unobserve(
-            gamaSection
-          );
-
-        }
-
-      });
-
-    }, {
-
-      threshold: 0.3
-
-    });
-
-
-  gamaObserver.observe(gamaSection);
-
-}
-
-/* =========================================
-   계좌번호 열기 / 닫기
-========================================= */
-
-const accountToggles =
-  document.querySelectorAll(".account-toggle");
-
-
-accountToggles.forEach((toggle) => {
-
-  toggle.addEventListener("click", () => {
-
-    const group =
-      toggle.closest(".account-group");
-
-
-    group.classList.toggle("open");
-
-  });
-
-});
-
-
-
-/* =========================================
-   계좌번호 복사
-========================================= */
-
-const copyAccountButtons =
-  document.querySelectorAll(".copy-account");
-
-
-copyAccountButtons.forEach((button) => {
-
-  button.addEventListener("click", async () => {
-
-    const account =
-      button.dataset.account;
-
-
-    try {
-
-      await navigator.clipboard.writeText(
-        account
-      );
-
-
-      const originalText =
-        button.innerText;
-
-
-      button.innerText =
-        "복사완료";
-
-
-      setTimeout(() => {
-
-        button.innerText =
-          originalText;
-
-      }, 1500);
-
-
-    } catch (error) {
-
-      /*
-        일부 구형 브라우저 대비
-      */
-
-      const textarea =
-        document.createElement("textarea");
-
-
-      textarea.value =
-        account;
-
-
-      document.body.appendChild(
-        textarea
-      );
-
-
-      textarea.select();
-
-
-      document.execCommand(
-        "copy"
-      );
-
-
-      textarea.remove();
-
-
-      button.innerText =
-        "복사완료";
-
-
-      setTimeout(() => {
-
-        button.innerText =
-          "복사";
-
-      }, 1500);
-
-    }
-
-  });
-
-});
-
-/* =========================================
-   웨딩홀 지도
-========================================= */
-
-const mapContainer =
-  document.getElementById("weddingMap");
-
-
-if (mapContainer) {
-
-  const mapOption = {
-
-    center: new kakao.maps.LatLng(
-      35.0,
-      128.0
-    ),
-
-    level: 4
-
-  };
-
-
-  const map =
-    new kakao.maps.Map(
-      mapContainer,
-      mapOption
-    );
-
-
-  /* 주소 → 좌표 변환 */
-
-  const geocoder =
-    new kakao.maps.services.Geocoder();
-
-
-  geocoder.addressSearch(
-
-    "경남 진주시 진성면 동부로1307번길 37",
-
-    function (result, status) {
-
-
-      if (
-        status ===
-        kakao.maps.services.Status.OK
-      ) {
-
-        const position =
-          new kakao.maps.LatLng(
-            result[0].y,
-            result[0].x
-          );
-
-
-        /* 지도 중심 이동 */
-
-        map.setCenter(position);
-
-
-        /* 마커 */
-
-        const marker =
-          new kakao.maps.Marker({
-
-            map: map,
-
-            position: position
-
-          });
-
-
-        /* 식장 이름 */
-
-        const overlay =
-          new kakao.maps.CustomOverlay({
-
-            position: position,
-
-            yAnchor: 2.1,
-
-            content: `
-              <div class="wedding-map-label">
-                더 리움 웨딩홀
-              </div>
-            `
-
-          });
-
-
-        overlay.setMap(map);
-
-      }
-
-    }
-
+  modalClose.addEventListener(
+    "click",
+    closeGallery
   );
 
 }
 
-/* =========================================
-   카카오 웨딩홀 지도
-========================================= */
 
-const weddingMapContainer =
-  document.getElementById("weddingMap");
+/* 사진 바깥 검은 부분 클릭 */
+
+if (galleryModal) {
+
+  galleryModal.addEventListener(
+    "click",
+    (event) => {
+
+      if (
+        event.target === galleryModal
+      ) {
+
+        closeGallery();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* ESC 키로 닫기 */
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+
+    if (
+      event.key === "Escape" &&
+      galleryModal &&
+      galleryModal.classList.contains(
+        "show"
+      )
+    ) {
+
+      closeGallery();
+
+    }
+
+  }
+);
+
+
+
+/* =========================================================
+   5. 꽃가마 애니메이션
+========================================================= */
+
+const gamaSection =
+  document.querySelector(
+    ".gama-section"
+  );
+
+
+const gamaRunner =
+  document.querySelector(
+    ".gama-runner"
+  );
 
 
 if (
-  weddingMapContainer &&
-  typeof kakao !== "undefined"
+  gamaSection &&
+  gamaRunner &&
+  "IntersectionObserver" in window
 ) {
 
-  /*
-      처음 지도 위치는 임시 위치입니다.
-      아래 addressSearch가 성공하면
-      웨딩홀 위치로 자동 이동합니다.
-  */
+  const gamaObserver =
+    new IntersectionObserver(
+
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          /* 꽃가마 영역이 보이면 시작 */
+
+          if (entry.isIntersecting) {
+
+            gamaRunner.classList.add(
+              "is-running"
+            );
+
+
+            /*
+              CSS에 infinite가 있기 때문에
+              클래스는 한 번만 추가하면 됨
+            */
+
+            gamaObserver.unobserve(
+              gamaSection
+            );
+
+          }
+
+        });
+
+      },
+
+      {
+        threshold: 0.3
+      }
+
+    );
+
+
+  gamaObserver.observe(
+    gamaSection
+  );
+
+}
+
+
+/* 구형 브라우저 */
+
+else if (
+  gamaSection &&
+  gamaRunner
+) {
+
+  gamaRunner.classList.add(
+    "is-running"
+  );
+
+}
+
+
+
+/* =========================================================
+   6. 계좌번호 열기 / 닫기
+========================================================= */
+
+const accountToggles =
+  document.querySelectorAll(
+    ".account-toggle"
+  );
+
+
+accountToggles.forEach(
+  (toggle) => {
+
+    toggle.addEventListener(
+      "click",
+      () => {
+
+        const group =
+          toggle.closest(
+            ".account-group"
+          );
+
+
+        if (!group) {
+          return;
+        }
+
+
+        group.classList.toggle(
+          "open"
+        );
+
+      }
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   7. 계좌번호 복사
+========================================================= */
+
+const copyAccountButtons =
+  document.querySelectorAll(
+    ".copy-account"
+  );
+
+
+copyAccountButtons.forEach(
+  (button) => {
+
+    button.addEventListener(
+      "click",
+      async () => {
+
+        const account =
+          button.dataset.account;
+
+
+        if (!account) {
+          return;
+        }
+
+
+        const originalText =
+          button.innerText;
+
+
+        try {
+
+          /* 최신 브라우저 */
+
+          if (
+            navigator.clipboard &&
+            window.isSecureContext
+          ) {
+
+            await navigator.clipboard.writeText(
+              account
+            );
+
+          }
+
+          else {
+
+            throw new Error(
+              "Clipboard API 사용 불가"
+            );
+
+          }
+
+
+          button.innerText =
+            "복사완료";
+
+
+          setTimeout(() => {
+
+            button.innerText =
+              originalText;
+
+          }, 1500);
+
+        }
+
+
+        catch (error) {
+
+          /*
+            아이폰 / 일부 모바일 브라우저
+            구형 브라우저 대비
+          */
+
+          const textarea =
+            document.createElement(
+              "textarea"
+            );
+
+
+          textarea.value =
+            account;
+
+
+          textarea.style.position =
+            "fixed";
+
+
+          textarea.style.opacity =
+            "0";
+
+
+          document.body.appendChild(
+            textarea
+          );
+
+
+          textarea.focus();
+
+          textarea.select();
+
+
+          try {
+
+            document.execCommand(
+              "copy"
+            );
+
+
+            button.innerText =
+              "복사완료";
+
+          }
+
+          catch (copyError) {
+
+            button.innerText =
+              "복사실패";
+
+          }
+
+
+          textarea.remove();
+
+
+          setTimeout(() => {
+
+            button.innerText =
+              originalText;
+
+          }, 1500);
+
+        }
+
+      }
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   8. 카카오 웨딩홀 지도
+========================================================= */
+
+const weddingMapContainer =
+  document.getElementById(
+    "weddingMap"
+  );
+
+
+function initWeddingMap() {
+
+  if (!weddingMapContainer) {
+    return;
+  }
+
+
+  /* 카카오 지도 API 확인 */
+
+  if (
+    typeof kakao === "undefined" ||
+    !kakao.maps
+  ) {
+
+    console.log(
+      "카카오 지도 API를 불러오지 못했습니다."
+    );
+
+    return;
+
+  }
+
+
+  /* 서비스 라이브러리 확인 */
+
+  if (
+    !kakao.maps.services
+  ) {
+
+    console.log(
+      "카카오 지도 services 라이브러리를 불러오지 못했습니다."
+    );
+
+    return;
+
+  }
+
+
+  /* -----------------------------------------
+     지도 생성
+  ----------------------------------------- */
 
   const weddingMapOption = {
 
-    center: new kakao.maps.LatLng(
-      35.18,
-      128.10
-    ),
+    /*
+      주소 검색 전 임시 중심 위치
+    */
+
+    center:
+      new kakao.maps.LatLng(
+        35.18,
+        128.10
+      ),
 
     level: 4
 
@@ -491,14 +855,17 @@ if (
 
   const weddingMap =
     new kakao.maps.Map(
+
       weddingMapContainer,
+
       weddingMapOption
+
     );
 
 
-  /*
-      주소를 실제 좌표로 변환
-  */
+  /* -----------------------------------------
+     주소 → 좌표 변환
+  ----------------------------------------- */
 
   const weddingGeocoder =
     new kakao.maps.services.Geocoder();
@@ -526,35 +893,32 @@ if (
           );
 
 
-        /*
-            지도 중심을 웨딩홀로 이동
-        */
+        /* 지도 중심 이동 */
 
         weddingMap.setCenter(
           weddingPosition
         );
 
 
-        /*
-            웨딩홀 마커 생성
-        */
+        /* ---------------------------------
+           마커 생성
+        --------------------------------- */
 
         const weddingMarker =
           new kakao.maps.Marker({
 
-            position: weddingPosition
+            position:
+              weddingPosition,
+
+            map:
+              weddingMap
 
           });
 
 
-        weddingMarker.setMap(
-          weddingMap
-        );
-
-
-        /*
-            마커 위 웨딩홀 이름
-        */
+        /* ---------------------------------
+           웨딩홀 이름 표시
+        --------------------------------- */
 
         const weddingOverlay =
           new kakao.maps.CustomOverlay({
@@ -562,13 +926,15 @@ if (
             position:
               weddingPosition,
 
-            content: `
-              <div class="wedding-map-label">
-                더 리움 웨딩홀
-              </div>
-            `,
+            yAnchor:
+              2.2,
 
-            yAnchor: 2.2
+            content:
+              `
+                <div class="wedding-map-label">
+                  더 리움 웨딩홀
+                </div>
+              `
 
           });
 
@@ -577,10 +943,14 @@ if (
           weddingMap
         );
 
-      } else {
+
+      }
+
+      else {
 
         console.log(
-          "웨딩홀 주소를 찾지 못했습니다."
+          "웨딩홀 주소를 찾지 못했습니다.",
+          status
         );
 
       }
@@ -591,94 +961,36 @@ if (
 
 }
 
-/* =========================================
-   청첩장 오프닝
-========================================= */
 
-const weddingIntro =
-  document.getElementById("weddingIntro");
+/* -----------------------------------------
+   카카오 API가 준비된 후 지도 실행
+----------------------------------------- */
 
-const openInvitation =
-  document.getElementById("openInvitation");
+if (
+  weddingMapContainer &&
+  typeof kakao !== "undefined" &&
+  kakao.maps
+) {
 
-const openInvitationText =
-  document.getElementById("openInvitationText");
+  /*
+    autoload=false를 사용했을 때도 대응
+  */
 
+  if (
+    typeof kakao.maps.load ===
+    "function"
+  ) {
 
-let introOpened = false;
-
-
-function startInvitation() {
-
-  if (!weddingIntro) {
-    return;
-  }
-
-
-  if (introOpened) {
-    return;
-  }
-
-
-  introOpened = true;
-
-
-  /* 리본 / 봉투 애니메이션 시작 */
-
-  weddingIntro.classList.add("opening");
-
-
-  /* 약 1.8초 후 오프닝 화면 제거 */
-
-  setTimeout(() => {
-
-    weddingIntro.classList.add(
-      "intro-finish"
+    kakao.maps.load(
+      initWeddingMap
     );
 
+  }
 
-    document.body.style.overflow =
-      "auto";
+  else {
 
+    initWeddingMap();
 
-    document.documentElement.style.overflow =
-      "auto";
-
-
-  }, 1800);
-
-}
-
-
-/* 오프닝 중 스크롤 막기 */
-
-if (weddingIntro) {
-
-  document.body.style.overflow =
-    "hidden";
-
-}
-
-
-/* 가운데 봉인 */
-
-if (openInvitation) {
-
-  openInvitation.addEventListener(
-    "click",
-    startInvitation
-  );
-
-}
-
-
-/* 청첩장 열기 버튼 */
-
-if (openInvitationText) {
-
-  openInvitationText.addEventListener(
-    "click",
-    startInvitation
-  );
+  }
 
 }
