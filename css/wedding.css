@@ -2043,8 +2043,7 @@ body {
 /* JS에서 is-running이 붙으면 시작 */
 
 .gama-runner.is-running {
-  animation:
-    gamaTravel 13s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation: gamaTravel 10s linear infinite;
 }
 
 
@@ -2478,24 +2477,27 @@ body {
 
 @keyframes gamaTravel {
 
+  /* 왼쪽 화면 밖 */
   0% {
     transform: translateX(-185%);
   }
 
+  /* 화면 안으로 이동 */
   42% {
     transform: translateX(-50%);
   }
 
-  52% {
+  /* 중앙에서 잠깐 정지 */
+  50% {
     transform: translateX(-50%);
   }
 
+  /* 오른쪽으로 퇴장 */
   100% {
     transform: translateX(105%);
   }
 
 }
-
 
 /* =========================================
    전체가 걸을 때 아주 미세하게 흔들림
