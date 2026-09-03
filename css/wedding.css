@@ -698,7 +698,7 @@ body {
 }
 
 #dday {
-  font-size: 14px;
+  font-size: 13px;
 
   color: #8b5e54;
 }
@@ -3538,97 +3538,4 @@ body {
     font-size: 19px;
   }
 
-}
-
-
-/* =================================================
-   모바일 가로 슬라이드 갤러리 - 최종 덮어쓰기
-================================================= */
-
-.gallery-section {
-  width: 100%;
-  overflow: hidden;
-}
-
-
-.gallery-inner {
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-
-/* 가로 슬라이드 영역 */
-
-.gallery-slider {
-  width: 100%;
-
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-
-  gap: 12px;
-
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-
-  padding: 4px 24px 18px;
-
-  box-sizing: border-box;
-
-  scroll-snap-type: x mandatory;
-
-  -webkit-overflow-scrolling: touch;
-
-  overscroll-behavior-x: contain;
-
-  touch-action: pan-x;
-
-  scrollbar-width: none;
-}
-
-
-.gallery-slider::-webkit-scrollbar {
-  display: none;
-}
-
-
-/* 각각의 사진 */
-
-.gallery-slider .gallery-item {
-  flex: 0 0 76% !important;
-
-  width: 76% !important;
-  min-width: 76% !important;
-  max-width: 76% !important;
-
-  scroll-snap-align: center;
-
-  display: block;
-
-  padding: 0;
-
-  margin: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  overflow: hidden;
-
-  touch-action: manipulation;
-}
-
-
-/* 사진 */
-
-.gallery-slider .gallery-item img {
-  display: block;
-
-  width: 100% !important;
-  height: auto;
-
-  aspect-ratio: 3 / 4;
-
-  object-fit: cover;
 }
