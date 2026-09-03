@@ -698,7 +698,7 @@ body {
 }
 
 #dday {
-  font-size: 11px;
+  font-size: 9px;
 
   color: #8b5e54;
 }
@@ -3538,4 +3538,10 @@ body {
     font-size: 19px;
   }
 
+}
+
+#dday {
+  font-size: 12px;
+
+  color: #8b5e54;
 }
