@@ -1179,15 +1179,6 @@ body {
    Gallery Grid
 ========================= */
 
-.gallery-grid {
-  display: grid;
-
-  grid-template-columns: repeat(2, 1fr);
-
-  gap: 8px;
-
-  margin-top: 50px;
-}
 
 .gallery-item {
   border: none;
@@ -1224,23 +1215,96 @@ body {
   filter: brightness(0.94);
 }
 
+/* =========================================
+   OUR MOMENTS - 가로 슬라이드 갤러리
+========================================= */
 
-/* 첫 번째 사진 크게 */
+.gallery-slider {
+  display: flex;
 
-.gallery-big {
-  grid-column: span 2;
+  gap: 12px;
 
-  aspect-ratio: 1 / 1.15;
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 4px 24px 18px;
+
+  scroll-snap-type: x mandatory;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
 }
 
 
-/* 중간 사진 가로 */
+/* 크롬 / 사파리 스크롤바 숨기기 */
 
-.gallery-wide {
-  grid-column: span 2;
-
-  aspect-ratio: 1 / 0.68;
+.gallery-slider::-webkit-scrollbar {
+  display: none;
 }
+
+
+/* 사진 하나 */
+
+.gallery-item {
+  flex: 0 0 76%;
+
+  scroll-snap-align: center;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  overflow: hidden;
+
+  cursor: pointer;
+}
+
+
+/* 사진 */
+
+.gallery-item img {
+  width: 100%;
+
+  aspect-ratio: 3 / 4;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+
+/* PC에서만 살짝 확대 */
+
+@media (hover: hover) {
+
+  .gallery-item:hover img {
+    transform: scale(1.025);
+  }
+
+}
+
+
+/* 안내 문구 */
+
+.gallery-guide {
+  margin-top: 13px;
+
+  font-size: 10px;
+
+  letter-spacing: 0.5px;
+
+  color: #9a918b;
+}
+
+
+
 
 
 /* 사진 위 은은한 효과 */
