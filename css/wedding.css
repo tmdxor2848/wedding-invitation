@@ -1,0 +1,684 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f3f0e9;
+  color: #333;
+  font-family: "Times New Roman", "Noto Serif KR", serif;
+}
+
+.wedding-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: #fffdf8;
+  min-height: 100vh;
+}
+
+.main-section {
+  min-height: 100vh;
+
+  padding: 70px 24px 50px;
+
+  text-align: center;
+}
+
+.main-date {
+  font-size: 13px;
+
+  letter-spacing: 4px;
+
+  color: #777;
+
+  margin-bottom: 30px;
+}
+
+.main-title {
+  font-size: 27px;
+
+  font-weight: 400;
+
+  margin-bottom: 14px;
+}
+
+.main-title span {
+  font-size: 18px;
+
+  margin: 0 8px;
+
+  color: #a54a45;
+}
+
+.main-message {
+  font-size: 15px;
+
+  color: #777;
+
+  margin-bottom: 45px;
+}
+
+.main-image {
+  width: 100%;
+
+  margin-bottom: 40px;
+}
+
+
+
+.image-placeholder {
+  width: 100%;
+
+  height: 520px;
+
+  overflow: hidden;
+
+  border-radius: 4px;
+}
+
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+}
+
+.wedding-info {
+  font-size: 15px;
+
+  line-height: 2;
+
+  color: #555;
+}
+
+/* =========================
+   초대글
+========================= */
+
+.invitation-section {
+  padding: 100px 25px;
+
+  background-color: #fffaf2;
+
+  text-align: center;
+}
+
+.invitation-content {
+  max-width: 420px;
+
+  margin: 0 auto;
+}
+
+.section-small-title {
+  font-size: 11px;
+
+  letter-spacing: 4px;
+
+  color: #a87c69;
+
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 23px;
+
+  font-weight: 400;
+
+  margin-bottom: 20px;
+
+  color: #3f3835;
+}
+
+.invitation-line {
+  width: 30px;
+  height: 1px;
+
+  margin: 0 auto 45px;
+
+  background-color: #b88f7a;
+}
+
+.invitation-text {
+  font-size: 15px;
+
+  line-height: 2.1;
+
+  margin-bottom: 28px;
+
+  color: #5b5551;
+}
+
+.invitation-last {
+  font-size: 15px;
+
+  line-height: 2.1;
+
+  margin-top: 40px;
+  margin-bottom: 50px;
+
+  color: #5b5551;
+}
+
+.couple-name {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 13px;
+
+  font-size: 14px;
+
+  color: #453f3b;
+}
+
+.couple-name .heart {
+  font-size: 11px;
+
+  color: #a54a45;
+}
+
+
+/* =========================
+   스크롤 애니메이션
+========================= */
+
+.fade-up {
+  opacity: 0;
+
+  transform: translateY(35px);
+
+  transition:
+    opacity 1.3s ease,
+    transform 1.3s ease;
+}
+
+.fade-up.show {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.invitation-thanks {
+  margin-top: 45px;
+  margin-bottom: 50px;
+
+  font-size: 17px;
+  font-weight: 500;
+
+  line-height: 2;
+
+  color: #8b5e54;
+}
+
+/* =========================
+   Wedding Day
+========================= */
+
+.wedding-day-section {
+  padding: 100px 25px;
+
+  text-align: center;
+
+  background-color: #fffdf8;
+}
+
+.wedding-date-box {
+  margin-top: 45px;
+  margin-bottom: 45px;
+}
+
+.wedding-date-box .year {
+  font-size: 14px;
+
+  letter-spacing: 4px;
+
+  color: #8b7c73;
+
+  margin-bottom: 10px;
+}
+
+.date-number {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 16px;
+
+  font-size: 46px;
+
+  font-weight: 300;
+
+  color: #413a36;
+}
+
+.date-number .dot {
+  font-size: 22px;
+
+  color: #a54a45;
+}
+
+.wedding-date-box .day {
+  margin-top: 10px;
+
+  font-size: 12px;
+
+  letter-spacing: 5px;
+
+  color: #999;
+}
+
+.wedding-time {
+  font-size: 15px;
+
+  line-height: 2;
+
+  color: #5b5551;
+}
+
+.hall-name {
+  margin-top: 10px;
+
+  font-size: 16px;
+
+  font-weight: 500;
+
+  color: #453f3b;
+}
+
+.dday-box {
+  margin-top: 40px;
+
+  padding: 18px 20px;
+
+  border-top: 1px solid #e8ded5;
+  border-bottom: 1px solid #e8ded5;
+}
+
+#dday {
+  font-size: 14px;
+
+  color: #8b5e54;
+}
+
+
+/* =========================
+   Calendar
+========================= */
+
+.calendar {
+  margin-top: 60px;
+  padding-top: 45px;
+
+  border-top: 1px solid #eee4dc;
+}
+
+.calendar-header {
+  margin-bottom: 35px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.calendar-header span {
+  font-size: 13px;
+
+  letter-spacing: 4px;
+
+  color: #8b5e54;
+}
+
+.calendar-header strong {
+  font-size: 20px;
+
+  font-weight: 400;
+
+  color: #403a36;
+}
+
+.calendar-grid {
+  display: grid;
+
+  grid-template-columns: repeat(7, 1fr);
+
+  text-align: center;
+}
+
+.calendar-days {
+  margin-bottom: 18px;
+
+  font-size: 9px;
+
+  letter-spacing: 1px;
+
+  color: #a59c96;
+}
+
+.calendar-dates {
+  row-gap: 10px;
+
+  font-size: 13px;
+
+  color: #5d5652;
+}
+
+.calendar-dates>span {
+  height: 38px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+.calendar-dates .sunday {
+  color: #b2766e;
+}
+
+
+/* 결혼식 날짜 */
+
+.wedding-date {
+  width: 38px;
+  height: 38px;
+
+  margin: 0 auto;
+
+  border-radius: 50%;
+
+  background-color: #a55f56;
+
+  color: white !important;
+
+  font-weight: 500;
+}
+
+.wedding-date small {
+  position: absolute;
+
+  bottom: -13px;
+
+  font-size: 8px;
+
+  color: #a55f56;
+}
+
+.calendar-message {
+  margin-top: 45px;
+
+  font-size: 13px;
+
+  line-height: 1.8;
+
+  color: #8c817b;
+}
+
+/* =========================
+   Wedding Gallery
+========================= */
+
+.gallery-section {
+  padding: 110px 18px;
+
+  background-color: #f8f4ed;
+
+  text-align: center;
+}
+
+.gallery-inner {
+  max-width: 440px;
+
+  margin: 0 auto;
+}
+
+.gallery-description {
+  margin-top: 15px;
+  margin-bottom: 25px;
+
+  font-size: 14px;
+
+  line-height: 1.9;
+
+  color: #8a817c;
+}
+
+
+/* =========================
+   Gallery Grid
+========================= */
+
+.gallery-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 8px;
+
+  margin-top: 50px;
+}
+
+.gallery-item {
+  border: none;
+
+  padding: 0;
+
+  background: none;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  position: relative;
+
+  aspect-ratio: 1 / 1.25;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.8s ease,
+    filter 0.8s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+
+  filter: brightness(0.94);
+}
+
+
+/* 첫 번째 사진 크게 */
+
+.gallery-big {
+  grid-column: span 2;
+
+  aspect-ratio: 1 / 1.15;
+}
+
+
+/* 중간 사진 가로 */
+
+.gallery-wide {
+  grid-column: span 2;
+
+  aspect-ratio: 1 / 0.68;
+}
+
+
+/* 사진 위 은은한 효과 */
+
+.gallery-item::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(to top,
+      rgba(0, 0, 0, 0.08),
+      transparent 35%);
+
+  pointer-events: none;
+}
+
+
+/* 사진 안내 */
+
+.gallery-guide {
+  margin-top: 28px;
+
+  font-size: 11px;
+
+  letter-spacing: 1px;
+
+  color: #aaa09a;
+}
+
+
+/* =========================
+   Gallery Modal
+========================= */
+
+.gallery-modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  background-color: rgba(24, 21, 20, 0.96);
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+}
+
+.gallery-modal.show {
+  opacity: 1;
+
+  visibility: visible;
+}
+
+.gallery-modal img {
+  max-width: 90%;
+  max-height: 82vh;
+
+  object-fit: contain;
+
+  opacity: 0;
+
+  transform: scale(0.96);
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.gallery-modal.show img {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+
+/* 닫기 */
+
+.modal-close {
+  position: absolute;
+
+  top: 25px;
+  right: 25px;
+
+  width: 42px;
+  height: 42px;
+
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 34px;
+
+  font-weight: 200;
+
+  cursor: pointer;
+}
+
+
+/* 좌우 이동 */
+
+.modal-arrow {
+  position: absolute;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 45px;
+  height: 60px;
+
+  border: none;
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 50px;
+
+  font-weight: 200;
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+
+.modal-prev {
+  left: 5px;
+}
+
+.modal-next {
+  right: 5px;
+}
+
+
+/* 몇 번째 사진 */
+
+.modal-count {
+  position: absolute;
+
+  bottom: 30px;
+
+  font-size: 12px;
+
+  letter-spacing: 2px;
+
+  color: rgba(255, 255, 255, 0.7);
+}
