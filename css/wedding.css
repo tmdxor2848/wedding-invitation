@@ -1296,6 +1296,8 @@ body {
   transition:
     opacity 0.4s ease,
     visibility 0.4s ease;
+
+  touch-action: none;
 }
 
 .gallery-modal.show {
@@ -1399,6 +1401,26 @@ body {
   letter-spacing: 2px;
 
   color: rgba(255, 255, 255, 0.7);
+}
+
+#modalImage {
+  max-width: 92%;
+  max-height: 82%;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+
+  /* 사진 확대 방지 */
+  touch-action: none;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  -webkit-user-drag: none;
+
+  -webkit-touch-callout: none;
 }
 
 /* =========================
