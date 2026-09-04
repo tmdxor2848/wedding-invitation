@@ -1,21 +1,21 @@
 /* =========================================================
-   전통 원목문 오프닝
+   웨딩 필름 오프닝
    기존 wedding.js의 예전 오프닝 코드는 삭제하고
    이 코드를 wedding.js 가장 위에 붙여넣으세요.
 ========================================================= */
 
-const wdDoorOpening =
-  document.getElementById("wdDoorOpening");
+const wdFilmOpening =
+  document.getElementById("wdFilmOpening");
 
-const wdDoorButton =
-  document.getElementById("wdDoorButton");
+const wdFilmButton =
+  document.getElementById("wdFilmButton");
 
-let wdDoorStarted = false;
+let wdFilmStarted = false;
 
 
 /* 오프닝이 보이는 동안 본문 스크롤 방지 */
 
-if (wdDoorOpening) {
+if (wdFilmOpening) {
 
   document.body.style.overflow = "hidden";
   document.documentElement.style.overflow = "hidden";
@@ -23,49 +23,63 @@ if (wdDoorOpening) {
 }
 
 
-function wdOpenDoorInvitation() {
+function wdOpenFilmInvitation() {
 
-  if (!wdDoorOpening || wdDoorStarted) {
+  if (!wdFilmOpening || wdFilmStarted) {
     return;
   }
 
-  wdDoorStarted = true;
+  wdFilmStarted = true;
 
-  wdDoorOpening.classList.add(
+
+  /* 1단계: 기존 타이틀 → 엔딩 문구 */
+
+  wdFilmOpening.classList.add(
     "is-opening"
   );
 
 
-  /* 문과 사진을 충분히 보여준 뒤 오프닝 종료 */
+  /* 2단계: 아이보리 빛으로 본문 연결 */
 
   setTimeout(() => {
 
-    wdDoorOpening.classList.add(
+    wdFilmOpening.classList.add(
+      "is-closing"
+    );
+
+  }, 1450);
+
+
+  /* 3단계: 실제 청첩장 노출 */
+
+  setTimeout(() => {
+
+    wdFilmOpening.classList.add(
       "is-finished"
     );
 
     document.body.style.overflow = "";
     document.documentElement.style.overflow = "";
 
-  }, 3600);
+  }, 2150);
 
 
-  /* 화면에서 완전히 제거 */
+  /* DOM에서 완전히 제거 */
 
   setTimeout(() => {
 
-    wdDoorOpening.remove();
+    wdFilmOpening.remove();
 
-  }, 4550);
+  }, 3300);
 
 }
 
 
-if (wdDoorButton) {
+if (wdFilmButton) {
 
-  wdDoorButton.addEventListener(
+  wdFilmButton.addEventListener(
     "click",
-    wdOpenDoorInvitation
+    wdOpenFilmInvitation
   );
 
 }

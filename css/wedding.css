@@ -2144,21 +2144,12 @@ body {
 }
 
 /* =========================================================
-   전통 원목문 오프닝
+   웨딩 필름 오프닝
    기존 wedding.css 맨 아래에 붙여넣으세요.
-   기존 페이지 스타일과 충돌하지 않도록 wd-door- 접두사를 사용합니다.
+   기존 페이지 스타일과 충돌하지 않도록 wd-film- 접두사를 사용합니다.
 ========================================================= */
 
-.wd-door-opening {
-  --door-wood-1: #5f493d;
-  --door-wood-2: #49362f;
-  --door-wood-3: #72584a;
-  --door-wood-4: #3b2d28;
-  --door-wine: #91353a;
-  --door-brass: #aa9067;
-  --door-brass-light: #d6c49d;
-  --door-brass-dark: #7f6748;
-
+.wd-film-opening {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -2167,58 +2158,21 @@ body {
   height: 100vh;
   height: 100dvh;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   overflow: hidden;
 
-  background:
-    radial-gradient(circle at 50% 32%,
-      rgba(255, 255, 255, .05),
-      transparent 35%),
-    #151211;
+  background: #0d0c0c;
 
   transition:
-    opacity .9s ease,
-    visibility .9s ease;
-}
-
-
-.wd-door-stage {
-  position: relative;
-
-  width: min(480px, 100vw);
-  height: 100vh;
-  height: 100dvh;
-
-  overflow: hidden;
-
-  perspective: 1700px;
-  perspective-origin: 50% 50%;
-
-  background: #111;
-
-  box-shadow:
-    0 0 90px rgba(0, 0, 0, .28);
+    opacity 1s ease,
+    visibility 1s ease;
 }
 
 
 /* =========================
-   문 뒤 웨딩사진
+   사진
 ========================= */
 
-.wd-door-reveal {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-
-  overflow: hidden;
-
-  background: #111;
-}
-
-.wd-door-reveal img {
+.wd-film-photo {
   position: absolute;
   inset: -2%;
 
@@ -2228,749 +2182,604 @@ body {
   object-fit: cover;
   object-position: center;
 
-  transform: scale(1.08);
+  opacity: 0;
 
   filter:
-    saturate(.84) contrast(.97) brightness(.83);
+    saturate(.82) contrast(.96) brightness(.86);
 
-  transition:
-    transform 5s cubic-bezier(.18, .7, .25, 1),
-    filter 1.5s ease;
+  transform:
+    scale(1.09);
+
+  animation:
+    wdFilmPhotoFade 1.5s .15s ease forwards,
+    wdFilmMove 8s .15s cubic-bezier(.18, .7, .25, 1) forwards;
 }
 
-.wd-door-reveal::after {
+
+.wd-film-opening::before {
   content: "";
 
   position: absolute;
   inset: 0;
+  z-index: 1;
+
+  pointer-events: none;
 
   background:
     linear-gradient(180deg,
-      rgba(12, 10, 9, .43) 0%,
-      rgba(12, 10, 9, .06) 38%,
-      rgba(12, 10, 9, .13) 61%,
-      rgba(12, 10, 9, .58) 100%);
+      rgba(8, 7, 7, .48) 0%,
+      rgba(8, 7, 7, .08) 35%,
+      rgba(8, 7, 7, .12) 57%,
+      rgba(8, 7, 7, .64) 100%);
 }
 
 
-.wd-door-reveal-copy {
+/* 아주 미세한 필름 질감 */
+
+.wd-film-opening::after {
+  content: "";
+
   position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  opacity: .13;
+
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle at 20% 30%,
+      white 0 .5px,
+      transparent .7px),
+    radial-gradient(circle at 70% 65%,
+      white 0 .45px,
+      transparent .65px),
+    radial-gradient(circle at 45% 80%,
+      white 0 .45px,
+      transparent .65px);
+
+  background-size:
+    19px 23px,
+    27px 31px,
+    37px 41px;
+
+  mix-blend-mode:
+    soft-light;
+}
+
+
+/* =========================
+   상단 작은 타이틀
+========================= */
+
+.wd-film-top {
+  position: absolute;
+
+  top:
+    max(34px, env(safe-area-inset-top));
+
   left: 0;
-  bottom: 10%;
-  z-index: 4;
+  z-index: 3;
 
   width: 100%;
   padding: 0 28px;
 
-  text-align: center;
-  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color:
+    rgba(255, 255, 255, .72);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 9px;
+  letter-spacing: 2.5px;
 
   opacity: 0;
-  transform: translateY(14px);
 
-  transition:
-    opacity 1s 1.05s ease,
-    transform 1.05s 1.05s cubic-bezier(.22, 1, .36, 1);
-}
-
-.wd-door-reveal-kicker {
-  margin: 0 0 16px;
-
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 10px;
-  letter-spacing: 4.5px;
-
-  color: rgba(255, 255, 255, .82);
-}
-
-.wd-door-reveal-copy h1 {
-  margin: 0;
-
-  font-size: 25px;
-  font-weight: 400;
-  letter-spacing: 1.3px;
-}
-
-.wd-door-reveal-copy h1 em {
-  margin: 0 9px;
-
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 20px;
-  font-weight: 400;
-  font-style: italic;
-
-  color: #dfb4b0;
-}
-
-.wd-door-reveal-date {
-  margin: 17px 0 0;
-
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 12px;
-  letter-spacing: 3.5px;
-
-  color: rgba(255, 255, 255, .8);
+  animation:
+    wdFilmTitleFade .9s .5s ease forwards;
 }
 
 
 /* =========================
-   문 사이 금빛
+   메인 타이틀
 ========================= */
 
-.wd-door-light {
+.wd-film-content {
   position: absolute;
-  left: 50%;
-  top: 5%;
+
+  left: 0;
+  bottom: 11%;
   z-index: 3;
 
-  width: 2px;
-  height: 90%;
+  width: 100%;
+  padding: 0 30px;
 
-  transform:
-    translateX(-50%) scaleY(.03);
+  text-align: center;
 
-  transform-origin: center;
+  color: #fff;
+}
 
+
+.wd-film-kicker,
+.wd-film-names,
+.wd-film-date,
+.wd-film-place,
+.wd-film-open {
   opacity: 0;
 
-  background:
-    linear-gradient(to bottom,
-      rgba(255, 241, 201, .98) 0%,
-      rgba(255, 228, 160, .94) 57%,
-      rgba(255, 218, 137, .54) 74%,
-      rgba(255, 218, 137, 0) 90%);
+  transform:
+    translateY(14px);
 
-  box-shadow:
-    0 0 11px rgba(255, 231, 170, .96),
-    0 0 34px rgba(255, 216, 133, .72),
-    0 0 82px rgba(255, 204, 102, .34);
+  animation:
+    wdFilmTitleUp .95s ease forwards;
+}
+
+
+.wd-film-kicker {
+  margin: 0 0 18px;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 11px;
+  letter-spacing: 5px;
+
+  animation-delay: .65s;
+}
+
+
+.wd-film-names {
+  margin: 0;
+
+  font-size: 27px;
+  font-weight: 400;
+  letter-spacing: 1.6px;
+
+  animation-delay: .9s;
+}
+
+.wd-film-names em {
+  margin: 0 9px;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 21px;
+  font-weight: 400;
+  font-style: italic;
+
+  color: #d7a5a4;
+}
+
+
+.wd-film-date {
+  margin: 18px 0 0;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 13px;
+  letter-spacing: 4px;
+
+  animation-delay: 1.15s;
+}
+
+
+.wd-film-place {
+  margin: 8px 0 0;
+
+  font-family:
+    "Cormorant Garamond",
+    "Noto Serif KR",
+    serif;
+
+  font-size: 10px;
+  letter-spacing: 2.3px;
+
+  color:
+    rgba(255, 255, 255, .76);
+
+  animation-delay: 1.35s;
+}
+
+
+/* =========================
+   OPEN INVITATION
+========================= */
+
+.wd-film-open {
+  position: relative;
+
+  display: inline-block;
+
+  margin-top: 38px;
+  padding: 10px 0 8px;
+
+  border: 0;
+
+  background:
+    transparent;
+
+  color: #fff;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 11px;
+  letter-spacing: 3.3px;
+
+  cursor: pointer;
+
+  touch-action: manipulation;
+
+  -webkit-tap-highlight-color:
+    transparent;
+
+  animation-delay: 1.65s;
+}
+
+.wd-film-open::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  width: 70px;
+  height: 1px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    rgba(255, 255, 255, .68);
 
   transition:
-    transform .65s ease,
+    width .35s ease,
     opacity .35s ease;
 }
 
-
-/* =========================
-   원목 한지문
-========================= */
-
-.wd-door-panel {
-  position: absolute;
-  top: 0;
-  z-index: 5;
-
-  width: 50.15%;
-  height: 100%;
-
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  will-change: transform;
-
-  background:
-    repeating-linear-gradient(0deg,
-      rgba(116, 90, 69, .018) 0,
-      rgba(116, 90, 69, .018) 1px,
-      transparent 1px,
-      transparent 5px),
-    linear-gradient(90deg,
-      #f2eadf 0%,
-      #fcf8f0 52%,
-      #ede2d5 100%);
-
-  box-shadow:
-    inset 0 0 55px rgba(66, 46, 37, .07);
-
-  transition:
-    transform 1.95s cubic-bezier(.72, 0, .2, 1),
-    box-shadow 1.55s ease,
-    filter 1.4s ease;
-}
-
-.wd-door-left {
-  left: 0;
-  transform-origin: left center;
-}
-
-.wd-door-right {
-  right: 0;
-  transform-origin: right center;
-}
-
-
-.wd-door-wood-frame {
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  box-shadow:
-    inset 0 0 0 11px rgba(73, 54, 45, .96),
-    inset 0 0 0 13px rgba(126, 96, 77, .55),
-    inset 0 0 0 15px rgba(53, 39, 34, .36);
-}
-
-.wd-door-wood-frame::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  opacity: .72;
-
-  background:
-    repeating-linear-gradient(92deg,
-      transparent 0 8px,
-      rgba(255, 255, 255, .025) 8px 9px,
-      transparent 9px 17px,
-      rgba(0, 0, 0, .05) 17px 18px),
-    repeating-linear-gradient(2deg,
-      rgba(0, 0, 0, .025) 0 1px,
-      transparent 1px 7px);
-
-  mix-blend-mode: multiply;
-}
-
-
-.wd-door-inner-frame {
-  position: absolute;
-
-  left: 26px;
-  right: 26px;
-  top: 7.5%;
-  bottom: 7.5%;
-
-  border:
-    7px solid var(--door-wood-1);
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .08),
-    0 0 0 1px rgba(48, 34, 29, .22),
-    0 4px 12px rgba(54, 38, 31, .08);
-
-  pointer-events: none;
-}
-
-.wd-door-inner-frame::before,
-.wd-door-inner-frame::after {
-  content: "";
-
-  position: absolute;
-
-  left: -7px;
-  right: -7px;
-
-  height: 6px;
-
-  background:
-    linear-gradient(180deg,
-      var(--door-wood-3),
-      var(--door-wood-1) 55%,
-      var(--door-wood-2));
-
-  box-shadow:
-    inset 0 1px rgba(255, 255, 255, .08),
-    0 1px 2px rgba(49, 35, 30, .18);
-}
-
-.wd-door-inner-frame::before {
-  top: 32%;
-}
-
-.wd-door-inner-frame::after {
-  bottom: 32%;
-}
-
-
-.wd-door-lattice {
-  position: absolute;
-
-  left: 50%;
-  top: 7.5%;
-  bottom: 7.5%;
-
-  width: 5px;
-
-  transform: translateX(-50%);
-
-  background:
-    linear-gradient(90deg,
-      var(--door-wood-2),
-      var(--door-wood-3) 48%,
-      var(--door-wood-2));
-
-  box-shadow:
-    inset 1px 0 rgba(255, 255, 255, .07),
-    1px 0 2px rgba(50, 35, 30, .15);
-
-  pointer-events: none;
-}
-
-
-.wd-door-edge {
-  position: absolute;
-  top: 0;
-
-  width: 13px;
-  height: 100%;
-
-  background:
-    linear-gradient(90deg,
-      #392c27 0%,
-      #675047 35%,
-      #795d4e 52%,
-      #47362f 100%);
-
-  box-shadow:
-    0 0 7px rgba(0, 0, 0, .22),
-    inset 1px 0 rgba(255, 255, 255, .06);
-}
-
-.wd-door-left .wd-door-edge {
-  right: 0;
-}
-
-.wd-door-right .wd-door-edge {
-  left: 0;
-}
-
-
-/* 경첩 */
-
-.wd-door-hinge {
-  position: absolute;
-  top: 22%;
-
-  width: 8px;
-  height: 55px;
-
-  border-radius: 8px;
-
-  background:
-    linear-gradient(90deg,
-      #594436,
-      #927454 45%,
-      #574331);
-
-  box-shadow:
-    0 3px 6px rgba(37, 28, 23, .2);
-}
-
-.wd-door-hinge::after {
-  content: "";
-
-  position: absolute;
-  left: 1px;
-  bottom: -180px;
-
-  width: 6px;
-  height: 48px;
-
-  border-radius: 8px;
-
-  background: inherit;
-}
-
-.wd-door-left .wd-door-hinge {
-  left: 8px;
-}
-
-.wd-door-right .wd-door-hinge {
-  right: 8px;
-}
-
-
-/* 황동 문고리 */
-
-.wd-door-handle {
-  position: absolute;
-  top: 50%;
-
-  width: 40px;
-  height: 40px;
-
-  transform: translateY(-50%);
-
-  border:
-    2px solid var(--door-brass);
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(circle,
-      transparent 51%,
-      rgba(187, 158, 112, .13) 53%,
-      transparent 62%);
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, .24),
-    0 3px 7px rgba(60, 43, 32, .16);
-
-  pointer-events: none;
-}
-
-.wd-door-left .wd-door-handle {
-  right: 22px;
-}
-
-.wd-door-right .wd-door-handle {
-  left: 22px;
-}
-
-.wd-door-handle::before {
-  content: "";
-
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  width: 8px;
-  height: 8px;
-
-  transform:
-    translate(-50%, -50%);
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(circle at 35% 30%,
-      var(--door-brass-light),
-      var(--door-brass) 65%,
-      var(--door-brass-dark) 100%);
+.wd-film-open:active::after {
+  width: 42px;
+  opacity: .6;
 }
 
 
 /* =========================
-   문 위 텍스트
+   엔딩
 ========================= */
 
-.wd-door-top-copy {
+.wd-film-ending {
   position: absolute;
+
   left: 0;
-  top: max(43px, env(safe-area-inset-top));
-  z-index: 8;
+  top: 50%;
+  z-index: 4;
 
   width: 100%;
-  margin: 0;
+  padding: 0 30px;
+
+  transform:
+    translateY(-50%) translateY(10px);
 
   text-align: center;
 
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 9px;
-  letter-spacing: 4.6px;
+  color: #fff;
 
-  color: #4a352e;
+  opacity: 0;
 
-  text-shadow:
-    0 1px 0 rgba(255, 255, 255, .72),
-    0 0 8px rgba(247, 239, 228, .88);
+  pointer-events: none;
 
   transition:
-    opacity .45s ease,
-    transform .55s ease;
+    opacity .72s ease,
+    transform .9s cubic-bezier(.22, 1, .36, 1);
 }
 
 
-.wd-door-closed-names {
-  position: absolute;
-  left: 50%;
-  top: 36.5%;
-  z-index: 8;
+.wd-film-ending-line {
+  display: block;
 
-  transform: translateX(-50%);
-
-  width: 100%;
-  padding: 0 24px;
-
-  text-align: center;
-
-  color: #46322c;
-
-  text-shadow:
-    0 1px 0 rgba(255, 255, 255, .72),
-    0 0 10px rgba(248, 241, 231, .9);
-
-  transition:
-    opacity .5s ease,
-    transform .65s cubic-bezier(.22, 1, .36, 1);
-}
-
-.wd-door-closed-small {
-  margin: 0 0 12px;
-
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 9px;
-  letter-spacing: 4px;
-
-  color: #735247;
-}
-
-.wd-door-closed-names h1 {
-  margin: 0;
-
-  font-size: 21px;
-  font-weight: 500;
-  letter-spacing: 1.8px;
-}
-
-.wd-door-closed-names h1 em {
-  margin: 0 8px;
-
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 17px;
-  font-weight: 400;
-  font-style: italic;
-
-  color: var(--door-wine);
-}
-
-.wd-door-closed-date {
-  margin: 11px 0 0;
-
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 10px;
-  letter-spacing: 3px;
-
-  color: #735247;
-}
-
-
-/* =========================
-   가운데 매듭 버튼
-========================= */
-
-.wd-door-open-button {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 9;
-
-  width: 70px;
-  height: 70px;
-
-  transform:
-    translate(-50%, -50%);
-
-  padding: 0;
-  border: 0;
-
-  background: transparent;
-
-  cursor: pointer;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-
-  transition:
-    opacity .45s ease,
-    transform .6s ease;
-}
-
-.wd-door-knot {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  width: 44px;
-  height: 44px;
-
-  transform:
-    translate(-50%, -50%) rotate(45deg);
-
-  display: grid;
-  place-items: center;
-
-  border:
-    1px solid rgba(102, 28, 33, .4);
-
-  background:
-    linear-gradient(145deg,
-      #aa4247,
-      #843036);
-
-  box-shadow:
-    0 5px 12px rgba(76, 26, 29, .19);
-}
-
-.wd-door-knot>span {
-  transform: rotate(-45deg);
-
-  font-size: 9px;
-  letter-spacing: 1px;
-
-  color: #f3e2ca;
-}
-
-.wd-door-open-button::before,
-.wd-door-open-button::after {
-  content: "";
-
-  position: absolute;
-  top: 50%;
-
-  width: 24px;
+  width: 0;
   height: 1px;
 
+  margin: 0 auto 17px;
+
   background:
-    rgba(145, 53, 58, .72);
-}
-
-.wd-door-open-button::before {
-  left: -9px;
-}
-
-.wd-door-open-button::after {
-  right: -9px;
-}
-
-
-.wd-door-bottom-copy {
-  position: absolute;
-  left: 0;
-  bottom: max(48px, env(safe-area-inset-bottom));
-  z-index: 8;
-
-  width: 100%;
-
-  text-align: center;
+    linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, .9) 22%,
+      rgba(255, 255, 255, .9) 78%,
+      transparent);
 
   transition:
-    opacity .45s ease,
-    transform .55s ease;
+    width .9s .22s cubic-bezier(.22, 1, .36, 1);
 }
 
-.wd-door-promise {
+
+.wd-film-ending-eng {
   margin: 0;
 
-  font-size: 11px;
-  letter-spacing: 6px;
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
 
-  color: #4a352e;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 4.8px;
 
-  text-shadow:
-    0 1px 0 rgba(255, 255, 255, .72),
-    0 0 8px rgba(247, 239, 228, .86);
+  color:
+    rgba(255, 255, 255, .94);
 }
 
-.wd-door-guide {
-  margin: 13px 0 0;
 
-  font-family: "Noto Serif KR", serif;
-  font-size: 9px;
+.wd-film-ending-kor {
+  margin: 11px 0 0;
+
+  font-family:
+    "Noto Serif KR",
+    serif;
+
+  font-size: 10px;
+  font-weight: 300;
   letter-spacing: 2px;
 
-  color: #6c4d42;
+  color:
+    rgba(255, 255, 255, .72);
+}
+
+
+/* 가운데 따뜻한 빛 */
+
+.wd-film-bloom {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 50% 48%,
+      rgba(255, 244, 224, .24) 0%,
+      rgba(255, 236, 209, .10) 25%,
+      transparent 58%);
+
+  transition:
+    opacity 1.1s ease;
+}
+
+
+/* 마지막 아이보리 전환 */
+
+.wd-film-paper-fade {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -20%;
+  z-index: 5;
+
+  height: 58%;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(to top,
+      rgba(251, 250, 247, .92) 0%,
+      rgba(251, 250, 247, .60) 34%,
+      rgba(251, 250, 247, .16) 70%,
+      transparent 100%);
+
+  transform:
+    translateY(24%);
+
+  transition:
+    opacity .95s ease,
+    transform 1.1s cubic-bezier(.22, 1, .36, 1);
 }
 
 
 /* =========================
-   문 열림
+   버튼 클릭 후
 ========================= */
 
-.wd-door-opening.is-opening .wd-door-light {
+.wd-film-opening.is-opening .wd-film-content,
+
+.wd-film-opening.is-opening .wd-film-top {
+  animation: none;
+
+  transition:
+    opacity .6s ease,
+    transform .7s ease;
+
+  opacity: 0;
+
+  transform:
+    translateY(-8px);
+}
+
+
+.wd-film-opening.is-opening .wd-film-photo {
+  animation: none;
+
+  opacity: .94;
+
+  transform:
+    scale(1.005) translate3d(0, -.4%, 0);
+
+  transition:
+    transform 2.25s cubic-bezier(.22, 1, .36, 1),
+    opacity 1.2s ease,
+    filter 1.4s ease;
+
+  filter:
+    saturate(.90) contrast(.98) brightness(.98);
+}
+
+
+.wd-film-opening.is-opening .wd-film-ending {
   opacity: 1;
 
   transform:
-    translateX(-50%) scaleY(1);
+    translateY(-50%) translateY(0);
 }
 
-.wd-door-opening.is-opening .wd-door-left {
-  transform:
-    rotateY(-104deg);
-
-  box-shadow:
-    28px 0 50px rgba(0, 0, 0, .32);
-
-  filter:
-    brightness(.78) saturate(.9);
+.wd-film-opening.is-opening .wd-film-ending-line {
+  width: 58px;
 }
 
-.wd-door-opening.is-opening .wd-door-right {
-  transform:
-    rotateY(104deg);
-
-  box-shadow:
-    -28px 0 50px rgba(0, 0, 0, .32);
-
-  filter:
-    brightness(.78) saturate(.9);
-}
-
-.wd-door-opening.is-opening .wd-door-open-button {
-  transform:
-    translate(-50%, -50%) scale(.55) rotate(20deg);
-
-  opacity: 0;
-}
-
-.wd-door-opening.is-opening .wd-door-top-copy {
-  transform:
-    translateY(-7px);
-
-  opacity: 0;
-}
-
-.wd-door-opening.is-opening .wd-door-closed-names {
-  transform:
-    translateX(-50%) translateY(-10px);
-
-  opacity: 0;
-}
-
-.wd-door-opening.is-opening .wd-door-bottom-copy {
-  transform:
-    translateY(8px);
-
-  opacity: 0;
-}
-
-.wd-door-opening.is-opening .wd-door-reveal img {
-  transform:
-    scale(1.015);
-
-  filter:
-    saturate(.9) contrast(.98) brightness(.96);
-}
-
-.wd-door-opening.is-opening .wd-door-reveal-copy {
+.wd-film-opening.is-opening .wd-film-bloom {
   opacity: 1;
-  transform: translateY(0);
 }
 
-.wd-door-opening.is-finished {
+
+/* 엔딩에서 실제 청첩장으로 전환 */
+
+.wd-film-opening.is-closing .wd-film-ending {
+  opacity: 0;
+
+  transform:
+    translateY(-50%) translateY(-8px);
+}
+
+.wd-film-opening.is-closing .wd-film-paper-fade {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+.wd-film-opening.is-closing .wd-film-photo {
+  transform:
+    scale(1) translate3d(0, 0, 0);
+
+  filter:
+    saturate(.94) contrast(.99) brightness(1);
+}
+
+
+.wd-film-opening.is-finished {
   opacity: 0;
   visibility: hidden;
+
   pointer-events: none;
+
+  transition:
+    opacity 1.05s ease,
+    visibility 1.05s ease;
+}
+
+
+/* =========================
+   애니메이션
+========================= */
+
+@keyframes wdFilmPhotoFade {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: .86;
+  }
+
+}
+
+
+@keyframes wdFilmMove {
+
+  from {
+    transform:
+      scale(1.09) translate3d(0, 0, 0);
+  }
+
+  to {
+    transform:
+      scale(1.015) translate3d(0, -1%, 0);
+  }
+
+}
+
+
+@keyframes wdFilmTitleFade {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+@keyframes wdFilmTitleUp {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
 }
 
 
 @media (max-width: 380px) {
 
-  .wd-door-inner-frame {
-    left: 22px;
-    right: 22px;
+  .wd-film-names {
+    font-size: 24px;
   }
 
-  .wd-door-reveal-copy h1 {
-    font-size: 23px;
+  .wd-film-content {
+    bottom: 9%;
   }
 
-  .wd-door-left .wd-door-handle {
-    right: 18px;
-  }
-
-  .wd-door-right .wd-door-handle {
-    left: 18px;
-  }
 }
 
 
 @media (prefers-reduced-motion: reduce) {
 
-  .wd-door-panel,
-  .wd-door-reveal img,
-  .wd-door-reveal-copy,
-  .wd-door-light {
-    transition-duration: .01ms !important;
+  .wd-film-photo,
+  .wd-film-kicker,
+  .wd-film-names,
+  .wd-film-date,
+  .wd-film-place,
+  .wd-film-open,
+  .wd-film-top {
+    animation-duration:
+      .01ms !important;
+
+    animation-delay:
+      0s !important;
   }
 
 }
