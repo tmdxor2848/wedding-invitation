@@ -441,6 +441,39 @@ body {
 
 
 /* =========================
+   SECTION DIVIDER
+========================= */
+
+.section-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 0;
+
+  background-color: #fbfaf7;
+}
+
+.section-divider span {
+  width: 45px;
+  height: 1px;
+
+  background-color: #d9ccc3;
+}
+
+.section-divider i {
+  width: 5px;
+  height: 5px;
+
+  background-color: #b5383e;
+
+  transform: rotate(45deg);
+}
+
+
+/* =========================
    WEDDING DAY
 ========================= */
 
