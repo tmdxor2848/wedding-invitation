@@ -1878,6 +1878,17 @@ body {
     max-height 0.55s ease;
 }
 
+/* 관계 + 이름 */
+
+.person-info {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+}
+
 
 .account-group.open .account-content {
   max-height: 500px;
@@ -1895,10 +1906,10 @@ body {
 
 .account-person {
   display: flex;
-
+  justify-content: space-between;
   align-items: center;
 
-  gap: 8px;
+  width: 100%;
 
   margin-bottom: 12px;
 }
@@ -1906,6 +1917,7 @@ body {
 
 .account-relation {
   width: 65px;
+
   flex-shrink: 0;
 
   font-size: 10px;
@@ -1914,24 +1926,26 @@ body {
 
 
 .account-person strong {
-  width: 48px;
-  flex-shrink: 0;
-
   font-size: 14px;
   font-weight: 500;
+
   color: #443d39;
+
+  white-space: nowrap;
 }
 
+
+/* 계좌번호 + 복사 */
 
 .account-number {
   display: flex;
-
   justify-content: space-between;
   align-items: center;
 
+  width: 100%;
+
   gap: 10px;
 }
-
 
 .account-number span {
   min-width: 0;
@@ -2800,15 +2814,15 @@ body {
 .name-contact {
   display: flex;
   align-items: center;
-  gap: 7px;
 
-  margin-left: 165px;
+  gap: 10px;
+
+  flex-shrink: 0;
 }
 
-
 .name-contact-btn {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 
   display: flex;
   justify-content: center;
@@ -2823,7 +2837,7 @@ body {
 
 
 .name-contact-btn i {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 
