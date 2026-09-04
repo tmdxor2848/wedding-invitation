@@ -1,3 +1,74 @@
+/* =========================================================
+   전통 원목문 오프닝
+   기존 wedding.js의 예전 오프닝 코드는 삭제하고
+   이 코드를 wedding.js 가장 위에 붙여넣으세요.
+========================================================= */
+
+const wdDoorOpening =
+  document.getElementById("wdDoorOpening");
+
+const wdDoorButton =
+  document.getElementById("wdDoorButton");
+
+let wdDoorStarted = false;
+
+
+/* 오프닝이 보이는 동안 본문 스크롤 방지 */
+
+if (wdDoorOpening) {
+
+  document.body.style.overflow = "hidden";
+  document.documentElement.style.overflow = "hidden";
+
+}
+
+
+function wdOpenDoorInvitation() {
+
+  if (!wdDoorOpening || wdDoorStarted) {
+    return;
+  }
+
+  wdDoorStarted = true;
+
+  wdDoorOpening.classList.add(
+    "is-opening"
+  );
+
+
+  /* 문과 사진을 충분히 보여준 뒤 오프닝 종료 */
+
+  setTimeout(() => {
+
+    wdDoorOpening.classList.add(
+      "is-finished"
+    );
+
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
+
+  }, 3600);
+
+
+  /* 화면에서 완전히 제거 */
+
+  setTimeout(() => {
+
+    wdDoorOpening.remove();
+
+  }, 4550);
+
+}
+
+
+if (wdDoorButton) {
+
+  wdDoorButton.addEventListener(
+    "click",
+    wdOpenDoorInvitation
+  );
+
+}
 
 
 /* 1. 스크롤 FADE */
