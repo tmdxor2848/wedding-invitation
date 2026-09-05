@@ -10,6 +10,12 @@ const wdFilmOpening =
 const wdFilmButton =
   document.getElementById("wdFilmButton");
 
+const weddingMusic =
+  document.getElementById("weddingMusic");
+
+const musicToggle =
+  document.getElementById("musicToggle");
+
 let wdFilmStarted = false;
 
 
@@ -30,6 +36,31 @@ function wdOpenFilmInvitation() {
   }
 
   wdFilmStarted = true;
+
+  /* 배경음악 시작 */
+
+  if (weddingMusic) {
+
+    weddingMusic.volume = 0.3;
+
+    weddingMusic.currentTime = 56;
+
+    weddingMusic
+      .play()
+      .then(() => {
+
+        if (musicToggle) {
+          musicToggle.classList.add("is-visible");
+        }
+
+      })
+      .catch(() => {
+
+        console.log("음악 자동 재생이 차단되었습니다.");
+
+      });
+
+  }
 
 
   /* 1단계: 기존 타이틀 → 엔딩 문구 */
@@ -306,4 +337,87 @@ if (weddingMapContainer && window.kakao?.maps) {
   } else {
     initWeddingMap();
   }
+}
+
+/* =========================================
+   배경음악 ON / OFF
+========================================= */
+
+if (
+  musicToggle &&
+  weddingMusic
+) {
+
+  musicToggle.addEventListener(
+    "click",
+    () => {
+
+      const icon =
+        musicToggle.querySelector("i");
+
+
+      /* 음악이 재생 중이면 끄기 */
+
+      if (!weddingMusic.paused) {
+
+        weddingMusic.pause();
+
+        musicToggle.classList.add(
+          "is-muted"
+        );
+
+        musicToggle.setAttribute(
+          "aria-pressed",
+          "false"
+        );
+
+        musicToggle.setAttribute(
+          "aria-label",
+          "배경음악 켜기"
+        );
+
+        if (icon) {
+
+          icon.className =
+            "fa-solid fa-volume-xmark";
+
+        }
+
+        return;
+      }
+
+
+      /* 음악이 꺼져 있으면 다시 켜기 */
+
+      weddingMusic
+        .play()
+        .then(() => {
+
+          musicToggle.classList.remove(
+            "is-muted"
+          );
+
+          musicToggle.setAttribute(
+            "aria-pressed",
+            "true"
+          );
+
+          musicToggle.setAttribute(
+            "aria-label",
+            "배경음악 끄기"
+          );
+
+          if (icon) {
+
+            icon.className =
+              "fa-solid fa-volume-high";
+
+          }
+
+        })
+        .catch(() => { });
+
+    }
+  );
+
 }
